@@ -1,0 +1,11 @@
+.settings
+target
+.project
+.classpath
+*.kubecfg
+rest/KeyPair/publicKey
+rest/KeyPair/privateKey
+common/KeyPair/publicKey
+common/KeyPair/privateKey
+collector/KeyPair/publicKey
+collector/KeyPair/privateKey
