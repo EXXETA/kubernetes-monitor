@@ -96,7 +96,7 @@ public class Collector {
 
 	private void collectClusterAvailability(StatusReport oldStatus, StatusReport result, MonitorConfig config) {
 		for (ClusterConfig cluster : config.getClusters()) {
-			ClusterAvailablility oldAvailability = oldStatus.getClusterAvailability(cluster.getName());
+			ClusterAvailablility oldAvailability = oldStatus==null?null:oldStatus.getClusterAvailability(cluster.getName());
 			ClusterAvailablility newAvailability = new ClusterAvailablility(oldAvailability);
 			newAvailability.setClusterName(cluster.getName());
 			boolean available = true;
