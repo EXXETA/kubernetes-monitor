@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 
 public class MonitorConfig {
 
+	private String name;
 	private String privateKey;
 	private String publicKey;
 	private String webDavUser;
@@ -133,6 +134,12 @@ public class MonitorConfig {
 	public void setSmptServer(String smptServer) {
 		this.smptServer = smptServer;
 	}
+	public String getName() {
+		return name;
+	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 }

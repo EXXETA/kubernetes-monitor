@@ -32,20 +32,20 @@ import com.exxeta.we.kubernetes.monitor.saver.ReportSaver;
 public class MyServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private final ReportSaver saver;
-	private final MonitorConfig config;
+
+	private final RestConfig config;
 
 	public MyServlet() {
-		MonitorConfig loadedConfig = null;
+		RestConfig loadedConfig = null;
 		try {
-			loadedConfig = MonitorConfig.getConfigFromFile(new File("config.json"));
+			loadedConfig = RestConfig.getConfigFromFile(new File("kubeRest.json"));
 		} catch (IOException e) {
 			System.out.println(new File("config.json").getAbsolutePath());
-			
+
 			e.printStackTrace();
 		}
 		config = loadedConfig;
-		saver = ReportSaver.getSaver(config);
+
 	}
 
 	@Override
@@ -55,13 +55,18 @@ public class MyServlet extends HttpServlet {
 
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		resp.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-		if ("/status".equals(req.getPathInfo())) {
-			PrintWriter out = resp.getWriter();
-			byte[] json = saver.loadJson();
-			out.write(new String(json));
-		} else if ("/status/alert".equals(req.getPathInfo())) {
+		boolean envFound = false;
+		for (MonitorConfig env : config.getEnvironments()) {
+			if (req.getPathInfo().equals(env.getName())) {
+				PrintWriter out = resp.getWriter();
 
-		} else {
+				byte[] json = ReportSaver.getSaver(env).loadJson();
+				out.write(new String(json));
+				envFound = true;
+				break;
+			}
+		}
+		if (!envFound) {
 			resp.setStatus(404);
 		}
 
