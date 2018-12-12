@@ -133,9 +133,9 @@ public class AlertManager {
 			result.add(new WrongObjectCountIssue(region, stage, cluster, appName, newObject.getObjectClass(), newObject.getActualNumber(), newObject.getExpectedNumber()));
 		}
 		
-		if (!newObject.getUnexpectedObjects().isEmpty()){
-				result.add(new UnexpectedObjectIssue(region, stage, cluster, appName, newObject.getObjectClass(),newObject.getUnexpectedObjects()));
-		}
+//		if (!newObject.getUnexpectedObjects().isEmpty()){
+//				result.add(new UnexpectedObjectIssue(region, stage, cluster, appName, newObject.getObjectClass(),newObject.getUnexpectedObjects()));
+//		}
 		return result;
 	}
 
