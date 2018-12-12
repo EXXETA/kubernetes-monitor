@@ -40,7 +40,7 @@ public class MyServlet extends HttpServlet {
 		try {
 			loadedConfig = RestConfig.getConfigFromFile(new File("kubeRest.json"));
 		} catch (IOException e) {
-			System.out.println(new File("config.json").getAbsolutePath());
+			System.out.println(new File("kubeRest.json").getAbsolutePath());
 
 			e.printStackTrace();
 		}
@@ -57,7 +57,7 @@ public class MyServlet extends HttpServlet {
 		resp.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
 		boolean envFound = false;
 		for (MonitorConfig env : config.getEnvironments()) {
-			if (req.getPathInfo().equals(env.getName())) {
+			if (req.getPathInfo().equals("/"+env.getName())) {
 				PrintWriter out = resp.getWriter();
 
 				byte[] json = ReportSaver.getSaver(env).loadJson();
@@ -67,6 +67,7 @@ public class MyServlet extends HttpServlet {
 			}
 		}
 		if (!envFound) {
+                        System.out.println("Cannot find env:" + req.getPathInfo());
 			resp.setStatus(404);
 		}
 
