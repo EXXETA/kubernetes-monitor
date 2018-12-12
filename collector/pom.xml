@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.exxeta.we.kubernetes</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.0.2</version>
+		<version>1.0.3</version>
 	</parent>
 	<build>
 		<plugins>
@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>com.exxeta.we.kubernetes</groupId>
 			<artifactId>common</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.3</version>
 		</dependency>
 
 		<dependency>

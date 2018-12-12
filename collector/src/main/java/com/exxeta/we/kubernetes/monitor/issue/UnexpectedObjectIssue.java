@@ -21,15 +21,17 @@ import java.util.List;
 
 public class UnexpectedObjectIssue implements Issue {
 	private String region;
-	private String stage;
+	private String stage;;
+	private String cluster;
 	private String appName;
 	private String objectClass;
 	private List<String> unexpectedObjects;
 
-	public UnexpectedObjectIssue(String region, String stage, String appName, String objectClass, List<String> unexpectedObjects) {
+	public UnexpectedObjectIssue(String region, String stage, String cluster, String appName, String objectClass, List<String> unexpectedObjects) {
 		super();
 		this.region = region;
 		this.stage = stage;
+		this.cluster = cluster;
 		this.appName = appName;
 		this.objectClass = objectClass;
 		this.unexpectedObjects=unexpectedObjects;
@@ -42,7 +44,7 @@ public class UnexpectedObjectIssue implements Issue {
 
 	@Override
 	public String getText() {
-		String result = "Region: "+region +"\n Stage: "+stage+"\n Application: "+appName+"\n\nUnexpected "+objectClass;
+		String result = "Region: "+region +"\n Stage: "+stage+"\n Cluster: "+cluster+" Application: "+appName+"\n\nUnexpected "+objectClass;
 		for (String unexpectedObject : unexpectedObjects){
 			result+="\n* "+unexpectedObject;
 		}
@@ -55,6 +57,7 @@ public class UnexpectedObjectIssue implements Issue {
 		int result = 1;
 		result = prime * result + ((appName == null) ? 0 : appName.hashCode());
 		result = prime * result + ((objectClass == null) ? 0 : objectClass.hashCode());
+		result = prime * result + ((cluster == null) ? 0 : cluster.hashCode());
 		result = prime * result + ((region == null) ? 0 : region.hashCode());
 		result = prime * result + ((stage == null) ? 0 : stage.hashCode());
 		result = prime * result + ((unexpectedObjects == null) ? 0 : unexpectedObjects.hashCode());
@@ -84,6 +87,11 @@ public class UnexpectedObjectIssue implements Issue {
 			if (other.region != null)
 				return false;
 		} else if (!region.equals(other.region))
+			return false;
+		if (cluster == null) {
+			if (other.cluster != null)
+				return false;
+		} else if (!cluster.equals(other.cluster))
 			return false;
 		if (stage == null) {
 			if (other.stage != null)

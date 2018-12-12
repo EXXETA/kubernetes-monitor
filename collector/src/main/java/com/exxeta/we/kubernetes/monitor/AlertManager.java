@@ -119,22 +119,22 @@ public class AlertManager {
 	private Collection<? extends Issue> getApplicationInstanceIssues(String appName, ApplicationInstanceState newAppInst) {
 		ArrayList<Issue> result = new ArrayList<>();
 		for (ObjectClassState newObjectState: newAppInst.getObjectStates()){
-			result.addAll(getObjectClassStateIssues (newObjectState, appName, newAppInst.getRegion(), newAppInst.getStage()));
+			result.addAll(getObjectClassStateIssues (newObjectState, appName, newAppInst.getCluster(), newAppInst.getRegion(), newAppInst.getStage()));
 		}
 		return result;
 	}
 
-	private Collection<? extends Issue> getObjectClassStateIssues(ObjectClassState newObject, String appName, String region, String stage) {
+	private Collection<? extends Issue> getObjectClassStateIssues(ObjectClassState newObject, String appName, String cluster, String region, String stage) {
 		ArrayList<Issue> result = new ArrayList<>();
 		if (newObject.isErrorDuringSelection()){
 			result.add(new CannotReadObjectClassIssue(region, stage, appName, newObject.getObjectClass()));
 		}
 		if (newObject.getExpectedNumber() != newObject.getActualNumber()){
-			result.add(new WrongObjectCountIssue(region, stage, appName, newObject.getObjectClass(), newObject.getActualNumber(), newObject.getExpectedNumber()));
+			result.add(new WrongObjectCountIssue(region, stage, cluster, appName, newObject.getObjectClass(), newObject.getActualNumber(), newObject.getExpectedNumber()));
 		}
 		
 		if (!newObject.getUnexpectedObjects().isEmpty()){
-				result.add(new UnexpectedObjectIssue(region, stage, appName, newObject.getObjectClass(),newObject.getUnexpectedObjects()));
+				result.add(new UnexpectedObjectIssue(region, stage, cluster, appName, newObject.getObjectClass(),newObject.getUnexpectedObjects()));
 		}
 		return result;
 	}

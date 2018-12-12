@@ -22,8 +22,10 @@ import java.util.List;
 
 public class ApplicationInstanceState {
 
-	private String stage;
-	private String region;
+	private final String stage;
+	private final String region;
+	private final String cluster;
+	private final String namespace;
 	
 	private List<ObjectClassState> objectStates = new ArrayList<>();
 	
@@ -31,10 +33,12 @@ public class ApplicationInstanceState {
 	
 	private List<Container> containers = new ArrayList<>();
 	
-	public ApplicationInstanceState(String stage, String region) {
+	public ApplicationInstanceState(String stage, String region, String cluster, String namespace) {
 		super();
 		this.stage = stage;
 		this.region = region;
+		this.cluster=cluster;
+		this.namespace=namespace;
 	}
 
 	public String getStage() {
@@ -43,6 +47,14 @@ public class ApplicationInstanceState {
 
 	public String getRegion() {
 		return region;
+	}
+	
+	public String getCluster() {
+		return cluster;
+	}
+	
+	public String getNamespace() {
+		return namespace;
 	}
 
 	public void addPodNotReady(String name) {

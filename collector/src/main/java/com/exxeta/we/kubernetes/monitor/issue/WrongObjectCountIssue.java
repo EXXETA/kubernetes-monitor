@@ -20,17 +20,19 @@ package com.exxeta.we.kubernetes.monitor.issue;
 public class WrongObjectCountIssue implements Issue {
 	private String region;
 	private String stage;
+	private String cluster;
 	private String appName;
 	private String objectClass;
 	private int actualNumber;
 	private int expectedNumber;
 	
 
-	public WrongObjectCountIssue(String region, String stage, String appName, String objectClass, int actualNumber,
+	public WrongObjectCountIssue(String region, String stage, String cluser, String appName, String objectClass, int actualNumber,
 			int expectedNumber) {
 		super();
 		this.region = region;
 		this.stage = stage;
+		this.cluster = cluser;
 		this.appName = appName;
 		this.objectClass = objectClass;
 		this.actualNumber = actualNumber;
@@ -44,7 +46,7 @@ public class WrongObjectCountIssue implements Issue {
 
 	@Override
 	public String getText() {
-		return "Region: "+region +"\n Stage: "+stage+"\n Application: "+appName+"\n\nWrong number of  "+objectClass
+		return "Region: "+region +"\n Stage: "+stage+"\n Cluster:"+cluster+"\n Application: "+appName+"\n\nWrong number of  "+objectClass
 				+"\nExpected: "+expectedNumber+"\nActual: "+actualNumber;
 	}
 

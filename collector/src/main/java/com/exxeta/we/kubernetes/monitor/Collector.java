@@ -151,7 +151,7 @@ public class Collector {
 		}
 
 		for (ApplicationConfig application : cluster.getApplications()) {
-			checkApplication(client, application, result);
+			checkApplication(client, application, result, cluster.getName());
 		}
 		client.close();
 		result.getApplications().sort(new Comparator<ApplicationState>() {
@@ -191,9 +191,9 @@ public class Collector {
 		return new DefaultKubernetesClient(kubeConfig);
 	}
 
-	private void checkApplication(DefaultKubernetesClient client, ApplicationConfig application, StatusReport result) {
+	private void checkApplication(DefaultKubernetesClient client, ApplicationConfig application, StatusReport result, String clusterName) {
 
-		ApplicationInstanceState state = new ApplicationInstanceState(application.getStage(), application.getRegion());
+		ApplicationInstanceState state = new ApplicationInstanceState(application.getStage(), application.getRegion(), clusterName, application.getNamespace());
 		if (application.getSelectors().isEmpty()) {
 			System.err.println("no selectors for " + application.getName() + " " + application.getRegion() + " "
 					+ application.getStage());
@@ -272,7 +272,8 @@ public class Collector {
 			} else if ("deployment".equals(selector.getObjectClass())) {
 				items = client.extensions().deployments().inNamespace(application.getNamespace()).list().getItems();
 			} else if ("replicaSet".equals(selector.getObjectClass())) {
-				items = client.extensions().replicaSets().inNamespace(application.getNamespace()).list().getItems();
+				items = client.extensions().replicaSets().inNamespace(application.getNamespace()).list().getItems()
+						.stream().filter(replicaset -> replicaset.getSpec().getReplicas() > 0).collect(toList());
 			} else if ("pod".equals(selector.getObjectClass())) {
 				items = client.pods().inNamespace(application.getNamespace()).list().getItems().stream()
 						.filter(pod -> !pod.getStatus().getPhase().equals("Failed")
