@@ -26,6 +26,7 @@ public class StatusReport {
 	private final List<ApplicationState> applications = new ArrayList<>();
 	private List<UnknownNamespace> unknownNamespaces = new ArrayList<>();
 	private List<ClusterAvailablility> clusterAvailability = new ArrayList<>();
+	private String domainName;
 	
 	public long getTimestamp() {
 		return timestamp;
@@ -81,5 +82,13 @@ public class StatusReport {
 	
 	public boolean isMalformedJson() {
 		return malformedJson;
+	}
+	
+	public String getDomainName() {
+		return domainName;
+	}
+	
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
 	}
 }

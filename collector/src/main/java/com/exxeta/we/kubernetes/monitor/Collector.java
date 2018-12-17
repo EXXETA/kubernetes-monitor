@@ -50,17 +50,18 @@ import io.fabric8.kubernetes.client.KubernetesClientException;
 public class Collector {
 
 	public static void main(String[] args) throws Exception {
-		new Collector().collect();
+		new Collector().collect("config.json");
 
 	}
 
-	private void collect() throws Exception {
+	public StatusReport collect(String fileName) throws Exception {
 
-		MonitorConfig config = MonitorConfig.getConfigFromFile(new File("config.json"));
+		MonitorConfig config = MonitorConfig.getConfigFromFile(new File(fileName));
 
 		ReportSaver saver = ReportSaver.getSaver(config);
 
 		StatusReport result = new StatusReport();
+		result.setDomainName(config.getName());
 
 		for (ClusterConfig cluster : config.getClusters()) {
 			try {
@@ -91,6 +92,8 @@ public class Collector {
 
 		new AlertManager(config).checkForNewIssues(oldStatus, result, config.getAlertEmailAddress(),
 				config.getSmptServer());
+		
+		return result;
 
 	}
 
