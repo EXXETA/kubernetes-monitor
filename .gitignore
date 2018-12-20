@@ -3,9 +3,9 @@ target
 .project
 .classpath
 *.kubecfg
-rest/KeyPair/publicKey
-rest/KeyPair/privateKey
-common/KeyPair/publicKey
-common/KeyPair/privateKey
-collector/KeyPair/publicKey
-collector/KeyPair/privateKey
+*.kubeconfig
+*/KeyPair/*
+KeyPair/*
+kubeRest.cfg
+kubeRest.json
+*/config.json

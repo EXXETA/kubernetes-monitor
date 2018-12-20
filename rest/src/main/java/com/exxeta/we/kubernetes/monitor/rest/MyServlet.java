@@ -56,8 +56,8 @@ public class MyServlet extends HttpServlet {
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		resp.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
 		boolean envFound = false;
-		for (MonitorConfig env : config.getEnvironments()) {
-			if (req.getPathInfo().equals("/"+env.getName())) {
+		for (MonitorConfig env : config.getEnvironments()) {	
+			if (req.getPathInfo().equals("/" + env.getName())) {
 				PrintWriter out = resp.getWriter();
 
 				byte[] json = ReportSaver.getSaver(env).loadJson();
@@ -67,10 +67,9 @@ public class MyServlet extends HttpServlet {
 			}
 		}
 		if (!envFound) {
-                        System.out.println("Cannot find env:" + req.getPathInfo());
+			System.out.println("Cannot find env:" + req.getPathInfo());
 			resp.setStatus(404);
 		}
-
 	}
 
 }

@@ -91,4 +91,11 @@ public class StatusReport {
 	public void setDomainName(String domainName) {
 		this.domainName = domainName;
 	}
+
+	public List<ClusterAvailablility> getClusterAvailability() {
+		return clusterAvailability;
+	}
+
+
+	
 }
