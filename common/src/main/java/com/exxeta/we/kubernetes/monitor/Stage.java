@@ -1,4 +1,4 @@
-package com.exxeta.com.we.kubernetes.monitor;
+package com.exxeta.we.kubernetes.monitor;
 
 import java.util.List;
 

@@ -31,6 +31,7 @@ import com.exxeta.we.kubernetes.monitor.config.ApplicationConfig;
 import com.exxeta.we.kubernetes.monitor.config.ClusterConfig;
 import com.exxeta.we.kubernetes.monitor.config.MonitorConfig;
 import com.exxeta.we.kubernetes.monitor.config.ObjectClassSelector;
+import com.exxeta.we.kubernetes.monitor.saver.DomainOverviewSaver;
 import com.exxeta.we.kubernetes.monitor.saver.ReportSaver;
 import com.google.gson.stream.MalformedJsonException;
 
@@ -87,8 +88,16 @@ public class Collector {
 		collectClusterAvailability(oldStatus, result, config);
 
 		saver.save(result);
-
 		System.out.println("Uploaded status");
+		
+		
+		DomainOverviewSaver domainOverviewSaver = DomainOverviewSaver.getSaver(config);
+		DomainOverview domainOverview = new DomainOverview();
+		domainOverview.collect(result);
+		
+		domainOverviewSaver.save(domainOverview);;
+		System.out.println("Uploaded Domain Overview");
+		
 
 		new AlertManager(config).checkForNewIssues(oldStatus, result, config.getAlertEmailAddress(),
 				config.getSmptServer());

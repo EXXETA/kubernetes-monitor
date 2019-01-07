@@ -1,11 +1,11 @@
-package com.exxeta.com.we.kubernetes.monitor;
+package com.exxeta.we.kubernetes.monitor;
 
 import java.util.List;
 
 import com.exxeta.we.kubernetes.monitor.ClusterAvailablility;
 
 
-public class Domain {
+public class DomainOverview {
 	
 	private String name;
 	private Long timestamp;
@@ -14,6 +14,38 @@ public class Domain {
 	private String status = "good";
 	private List<Stage> stages;
 
+	
+	public void collect(StatusReport statusReport) {
+		
+		this.setClusterConfig(statusReport.getClusterAvailability());
+		this.setLastUpdate(statusReport.getTimestamp());
+		
+		for (ApplicationState application : statusReport.getApplications()) {
+
+			for (ApplicationInstanceState applicationInstanceState : application.getInstances()) {
+
+				for (ObjectClassState objectClassState : applicationInstanceState.getObjectStates()) {
+
+					if (objectClassState.getExpectedNumber() > 0) {
+
+						if (objectClassState.getExpectedNumber() == objectClassState.getActualNumber()) {
+							// Everything is fine
+						} else if (objectClassState.getActualNumber() == 0) {
+							// All down
+							this.setStatus("danger");
+						} else if (objectClassState.getActualNumber() > 0) {
+							// At least one is active
+							this.setStatus("warning");
+						}
+					}
+					
+					if(!objectClassState.getUnexpectedObjects().isEmpty()) {
+						this.setStatus("warning");
+					}
+				}
+			}
+		}
+	}
 	
 	public String getName() {
 		return name;

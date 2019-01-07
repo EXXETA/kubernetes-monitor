@@ -35,6 +35,7 @@ public class MonitorConfig {
 	private String webDavUser;
 	private String webDavPassword;
 	private String reportUrl;
+	private String overviewUrl;
 	private String alertEmailAddress;
 	private List<ClusterConfig> clusters;
 	private Boolean encrypt;
@@ -141,5 +142,15 @@ public class MonitorConfig {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getOverviewUrl() {
+		return overviewUrl;
+	}
+
+	public void setOverviewUrl(String overviewUrl) {
+		this.overviewUrl = overviewUrl;
+	}
+	
+	
 	
 }

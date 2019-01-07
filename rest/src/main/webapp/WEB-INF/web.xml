@@ -17,7 +17,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>KubeMonitor Domain Overview</servlet-name>
-		<servlet-class>com.exxeta.we.kubernetes.monitor.rest.DomainOverview</servlet-class>
+		<servlet-class>com.exxeta.we.kubernetes.monitor.rest.Overview</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>KubeMonitor REST Service</servlet-name>
