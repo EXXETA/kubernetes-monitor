@@ -1,0 +1,16 @@
+language: java
+sudo: false
+cache:
+  directories:
+    - "$HOME/.cache"
+script:
+ - mvn verify
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file: 
+  - "rest/target/rest-*.war"
+  - "collector/target/KubernetesDataCollector-*-jar-with-dependencies.jar"
+  skip_cleanup: true
+  on:
+    tags: true
