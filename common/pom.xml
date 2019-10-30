@@ -3,23 +3,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.exxeta.we.kubernetes</groupId>
 	<artifactId>common</artifactId>
-	<version>1.1.2</version>
+	<version>1.2.0</version>
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>com.exxeta.we.kubernetes</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.1.2</version>
+		<version>1.2.0</version>
 	</parent>
 	<build>
 		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -28,7 +20,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.21.0</version>
+				<version>2.22.0</version>
 				<configuration>
 					<!-- Force alphabetical order to have a reproducible build -->
 					<runOrder>alphabetical</runOrder>
@@ -38,7 +30,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.9</version>
+				<version>0.8.5</version>
 				<executions>
 					<execution>
 						<id>pre-unit-tests</id>
@@ -57,9 +49,16 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
-		</plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+				<version>${build.plugins.plugin.version}</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
 	</build>
 	<dependencies>
 		<dependency>

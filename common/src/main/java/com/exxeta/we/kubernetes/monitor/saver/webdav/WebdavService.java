@@ -46,7 +46,7 @@ public class WebdavService extends ReportSaver {
 
 	@Override
 	protected byte[] loadRawData() {
-		Sardine sardine = SardineFactory.begin(config.getWebDavUser(), config.getWebDavPassword());
+		Sardine sardine = getSardineInstance();
 		try {
 			InputStream is = sardine.get(config.getReportUrl());
 			return IOUtils.toByteArray(is);
