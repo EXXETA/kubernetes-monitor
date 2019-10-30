@@ -104,7 +104,7 @@ public abstract class AbstractSaver {
         return AsymmetricCryptography.decrypt(config, data);
     }
 
-    public void save(StatusReport result) {
+    public void save(Object result) {
         try {
             byte[] myStatus = serialize(result).getBytes();
 

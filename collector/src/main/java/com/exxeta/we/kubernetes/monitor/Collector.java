@@ -95,7 +95,7 @@ public class Collector {
 		DomainOverview domainOverview = new DomainOverview();
 		domainOverview.collect(result);
 		
-		domainOverviewSaver.save(domainOverview);;
+		domainOverviewSaver.save(domainOverview);
 		System.out.println("Uploaded Domain Overview");
 		
 
