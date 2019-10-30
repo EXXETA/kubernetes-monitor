@@ -2,11 +2,8 @@ package com.exxeta.we.kubernetes.monitor;
 
 import java.util.List;
 
-import com.exxeta.we.kubernetes.monitor.ClusterAvailablility;
-
-
 public class DomainOverview {
-	
+
 	private String name;
 	private Long timestamp;
 	private List<ClusterAvailablility> clusterConfig;

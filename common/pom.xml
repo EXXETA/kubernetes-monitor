@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.exxeta.we.kubernetes</groupId>
 	<artifactId>common</artifactId>
-	<version>1.1.2</version>
+	<version>1.2.0</version>
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>com.exxeta.we.kubernetes</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.1.2</version>
+		<version>1.2.0</version>
 	</parent>
 	<build>
 		<plugins>
@@ -57,9 +57,17 @@
 					</execution>
 				</executions>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
 
 
-		</plugins>
+        </plugins>
 	</build>
 	<dependencies>
 		<dependency>

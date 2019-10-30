@@ -9,3 +9,8 @@ KeyPair/*
 kubeRest.cfg
 kubeRest.json
 */config.json
+
+.idea
+*.iml
+*.bak
+*.orig
